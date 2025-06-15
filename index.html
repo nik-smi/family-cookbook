@@ -10,6 +10,13 @@
         .line-clamp-3 {
             display: -webkit-box;
             -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;}
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;}
     </style>
@@ -21,7 +28,7 @@
         <div class="border rounded-lg grid grid-cols-[1fr_2fr] bg-white flex flex-row">
             <img src="" alt="Recipe Image" class="w-full h-full object-cover rounded-l-lg" />
             <div class="p-4 md:p-6 flex flex-col flex-grow">
-                <h3 class="text-xl font-semibold mb-2">[Recipe Title]</h3>
+                <h3 class="text-xl font-semibold mb-2 line-clamp-2">[Recipe Title]</h3>
                 <p class="text-gray-600 mb-2 flex-grow line-clamp-3">[Short description]</p>
                 <div class="flex space-x-4 text-sm text-gray-600 mt-auto">
                     <p class="text-sm text-gray-500">[Category]</p>
@@ -61,7 +68,7 @@
             },
             {
                 title: "Blueberry Pancakes",
-                image: "/Pictures/2.jpg",
+                image: "Pictures/2.jpg",
                 description: "Fluffy pancakes loaded with blueberries.",
                 category: "Breakfast",
                 difficulty: "Easy",
@@ -69,15 +76,15 @@
             },
             {
                 title: "Spaghetti Bolognese",
-                image: "/Pictures/3.jpg",
-                description: "Rich meat sauce with fresh herbs.",
+                image: "Pictures/3.jpg",
+                description: "Rich meat sauce with fresh herbss.",
                 category: "Dinner",
                 difficulty: "Difficult",
                 time: "30min"
             },
             {
                 title: "Blueberry Pancakes",
-                image: "/Pictures/4.jpg",
+                image: "Pictures/4.jpg",
                 description: "Fluffy pancakes loaded with blueberries.",
                 category: "Breakfast",
                 difficulty: "Difficult",
@@ -85,7 +92,7 @@
             },
             {
                 title: "Blueberry Pancakes",
-                image: "/Pictures/5.jpg",
+                image: "Pictures/5.jpg",
                 description: "Fluffy pancakes loaded with blueberries.",
                 category: "Breakfast",
                 difficulty: "Easy",
@@ -93,7 +100,7 @@
             },
             {
                 title: "Blueberry Pancakes",
-                image: "/Pictures/6.jpg",
+                image: "Pictures/6.jpg",
                 description: "Fluffy pancakes loaded with blueberries.",
                 category: "Breakfast",
                 difficulty: "Easy",
@@ -101,7 +108,7 @@
             },
             {
                 title: "Bananen mit Scholokade überzogen",
-                image: "/Pictures/7.jpg",
+                image: "Pictures/7.jpg",
                 description: "Bananen schneiden, mit geschmolzener Schokolade überzogen und danach ins Tiefkühlfach für 30min legen",
                 category: "Desert",
                 difficulty: "Easy",
@@ -109,7 +116,7 @@
             },
             {
                 title: "Blueberry Pancakes",
-                image: "/Pictures/8.jpg",
+                image: "Pictures/8.jpg",
                 description: "Fluffy pancakes loaded with blueberries.",
                 category: "Breakfast",
                 difficulty: "Easy",
@@ -117,7 +124,7 @@
             },
             {
                 title: "Spaghetti Bolognese",
-                image: "/Pictures/9.jpg",
+                image: "Pictures/9.jpg",
                 description: "Rich meat sauce with fresh herbs.",
                 category: "Dinner",
                 difficulty: "Difficult",
@@ -125,7 +132,7 @@
             },
             {
                 title: "Blueberry Pancakes",
-                image: "/Pictures/10.jpg",
+                image: "Pictures/10.jpg",
                 description: "Fluffy pancakes loaded with blueberries.",
                 category: "Breakfast",
                 difficulty: "Difficult",
@@ -133,7 +140,7 @@
             },
             {
                 title: "Blueberry Pancakes",
-                image: "/Pictures/11.jpg",
+                image: "Pictures/11.jpg",
                 description: "Fluffy pancakes loaded with blueberries.",
                 category: "Breakfast",
                 difficulty: "Easy",
@@ -141,7 +148,7 @@
             },
             {
                 title: "Blueberry Pancakes",
-                image: "/Pictures/12.jpg",
+                image: "Pictures/12.jpg",
                 description: "Fluffy pancakes loaded with blueberries.",
                 category: "Breakfast",
                 difficulty: "Easy",
@@ -149,7 +156,7 @@
             },
             {
                 title: "Spaghetti Bolognese",
-                image: "/Pictures/13.jpg",
+                image: "Pictures/13.jpg",
                 description: "Rich meat sauce with fresh herbs. This is a very long text to check truncation. This is a very long text to check truncation.",
                 category: "Dinner",
                 difficulty: "Standard",
@@ -157,7 +164,7 @@
             },
             {
                 title: "Blueberry Pancakes",
-                image: "/Pictures/14.jpg",
+                image: "Pictures/14.jpg",
                 description: "Fluffy pancakes loaded with blueberries.",
                 category: "Breakfast",
                 difficulty: "Easy",
@@ -165,7 +172,7 @@
             },
             {
                 title: "Spaghetti Bolognese",
-                image: "/Pictures/15.jpg",
+                image: "Pictures/15.jpg",
                 description: "Rich meat sauce with fresh herbs.",
                 category: "Dinner",
                 difficulty: "Difficult",
@@ -173,7 +180,7 @@
             },
             {
                 title: "Blueberry Pancakes",
-                image: "/Pictures/16.jpg",
+                image: "Pictures/16.jpg",
                 description: "Fluffy pancakes loaded with blueberries.",
                 category: "Breakfast",
                 difficulty: "Difficult",
@@ -181,7 +188,7 @@
             },
             {
                 title: "Blueberry Pancakes",
-                image: "/Pictures/17.jpg",
+                image: "Pictures/17.jpg",
                 description: "Fluffy pancakes loaded with blueberries.",
                 category: "Breakfast",
                 difficulty: "Easy",
@@ -189,7 +196,7 @@
             },
             {
                 title: "Blueberry Pancakes",
-                image: "/Pictures/18.jpg",
+                image: "Pictures/18.jpg",
                 description: "Fluffy pancakes loaded with blueberries.",
                 category: "Breakfast",
                 difficulty: "Easy",
