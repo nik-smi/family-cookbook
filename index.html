@@ -42,18 +42,18 @@
     <!-- Header -->
     <!-- <img src="About-family-picture.png" alt="This is our small family"/> -->
     <div class="max-w-5xl mx-auto p-6">
-        <p class="md:mt-10 text-blue-700 text-xs italic">GABRIEL-SMILJANIĆ EDITION</p>
-        <h1 class="font-semibold text-4xl md:text-5xl mt-8 mb-6">The family cookbook</h1>
-        <p>Welcome to our family recipe corner — a collection of simple or "simple" (depending on who is actually making them), delicious dishes we actually make and enjoy. </p>
+        <p class="md:mt-10 text-lime-700 text-xs italic">GABRIEL-SMILJANIĆ EDITION</p>
+        <h1 class="font-semibold text-4xl md:text-5xl mt-8 mb-6 md:mb-8">The family cookbook</h1>
+        <p>Welcome to our Family Cookbook - a cozy collection of simple (or “simple,” depending on who’s cooking) dishes we truly make, share, and enjoy. The meals in these pages are the ones we actually make—not just the ones that look good on paper. Easy enough to throw together and tasty enough that no one complains.</p>
     </div>
 
     <!-- Filter buttons -->
     <div class="max-w-5xl mx-auto pt-6 pl-6 pr-6">
-        <div id="filters" class="space-x-1 mb-1">
-            <button data-filter="All" class="filter-btn bg-gray-100 px-3 py-1.5 rounded">All</button>
-            <button data-filter="Breakfast" class="filter-btn bg-gray-100 px-3 py-1.5 rounded">Breakfast</button>
-            <button data-filter="Dinner" class="filter-btn bg-gray-100 px-3 py-1.5 rounded">Dinner</button>
-            <button data-filter="Dessert" class="filter-btn bg-gray-100 px-3 py-1.5 rounded">Dessert</button>
+        <div id="filters" class="space-x-0.5 mb-1">
+            <button data-filter="All" class="filter-btn text-sm bg-gray-100 px-4 py-2 rounded">All</button>
+            <button data-filter="Breakfast" class="filter-btn text-sm bg-gray-100 px-4 py-2 rounded">Breakfast</button>
+            <button data-filter="Dinner" class="filter-btn text-sm bg-gray-100 px-4 py-2 rounded">Dinner</button>
+            <button data-filter="Dessert" class="filter-btn text-sm bg-gray-100 px-4 py-2 rounded">Dessert</button>
         </div>
     </div>  
 
@@ -212,7 +212,7 @@
             const filterButtons = document.querySelectorAll('.filter-btn');
 
             // Set "All" active on initial load
-            document.querySelector('[data-filter="All"]').classList.add('bg-blue-500', 'text-white');
+            document.querySelector('[data-filter="All"]').classList.add('bg-lime-700', 'text-white');
 
             // Function to render recipes based on the selected category filter
             function renderRecipes(filter) {
@@ -255,10 +255,10 @@
                     renderRecipes(filter);
 
                     // Remove 'active' styles from all buttons
-                    filterButtons.forEach(btn => btn.classList.remove('bg-blue-500', 'text-white'));
+                    filterButtons.forEach(btn => btn.classList.remove('bg-lime-700', 'text-white'));
 
                     // Add 'active' styles to the clicked button
-                    button.classList.add('bg-blue-500', 'text-white');
+                    button.classList.add('bg-lime-700', 'text-white');
                 });
             });
         </script>  
