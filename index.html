@@ -25,15 +25,15 @@
 
      <!-- Recipe Card Template -->
      <template id="recipe-card-template">
-        <div class="border rounded-lg grid grid-cols-[1fr_2fr] bg-white flex flex-row">
+        <div class="border border-gray-200 rounded-lg grid grid-cols-[1fr_2fr] bg-white flex flex-row">
             <img src="" alt="Recipe Image" class="w-full h-full object-cover rounded-l-lg" />
             <div class="p-4 md:p-6 flex flex-col flex-grow">
                 <h3 class="text-xl font-semibold mb-2 line-clamp-2">[Recipe Title]</h3>
-                <p class="text-gray-600 mb-2 flex-grow line-clamp-3">[Short description]</p>
-                <div class="flex space-x-4 text-sm text-gray-600 mt-auto">
-                    <p class="text-sm text-gray-500">[Category]</p>
-                    <p class="text-sm text-gray-500">[Time]</p>
-                    <p class="text-sm text-gray-500">[Difficulty]</p>
+                <p class="text-gray-500 text-sm flex-grow line-clamp-3">[Short description]</p>
+                <div class="flex space-x-4 text-sm text-gray-400 mt-auto">
+                    <p>[Category]</p>
+                    <p>[Time]</p>
+                    <p>[Difficulty]</p>
                 </div>
             </div>
         </div>
@@ -46,13 +46,15 @@
         <p>Welcome to our family recipe corner — a collection of simple, delicious dishes we actually make and enjoy. No fancy or complicated stuff here, just meals we trust for busy weeknights and special weekends alike.</p>
     </div>
 
-    <!-- FUTURE FILTERS
-    <div id="filter-buttons" class="flex space-x-4 mb-6">
-        <button onclick="filterByCategory('All')" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">All</button>
-        <button onclick="filterByCategory('Breakfast')" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Breakfast</button>
-        <button onclick="filterByCategory('Dinner')" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Dinner</button>
-    </div>
-    -->
+    <!-- Filter buttons -->
+    <div class="max-w-5xl mx-auto pt-6 pl-6 pr-6">
+        <div id="filters" class="space-x-1 mb-1">
+            <button data-filter="All" class="filter-btn bg-gray-100 px-3 py-1.5 rounded">All</button>
+            <button data-filter="Breakfast" class="filter-btn bg-gray-100 px-3 py-1.5 rounded">Breakfast</button>
+            <button data-filter="Dinner" class="filter-btn bg-gray-100 px-3 py-1.5 rounded">Dinner</button>
+            <button data-filter="Dessert" class="filter-btn bg-gray-100 px-3 py-1.5 rounded">Dessert</button>
+        </div>
+    </div>  
 
     <!-- Recipes -->
     <div id="recipes" class="max-w-5xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-6 mb-20">
@@ -110,7 +112,7 @@
                 title: "Obstteller mit Scholokade überzogen",
                 image: "Pictures/7.jpg",
                 description: "Bananen schneiden, mit geschmolzener Schokolade überzogen und danach ins Tiefkühlfach für 30min legen",
-                category: "Desert",
+                category: "Dessert",
                 difficulty: "Easy",
                 time: "20min"
             },
@@ -206,16 +208,57 @@
             
             const container = document.getElementById('recipes');
             const template = document.getElementById('recipe-card-template');
+            const filterButtons = document.querySelectorAll('.filter-btn');
 
-            recipeData.forEach(recipe => {
-            const clone = template.content.cloneNode(true);
-            clone.querySelector('img').src = recipe.image;
-            clone.querySelector('h3').textContent = recipe.title;
-            clone.querySelector('p').textContent = recipe.description;
-            clone.querySelectorAll('p')[1].textContent = recipe.category;
-            clone.querySelectorAll('p')[2].textContent = recipe.difficulty;
-            clone.querySelectorAll('p')[3].textContent = recipe.time;
-            container.appendChild(clone);
+            // Set "All" active on initial load
+            document.querySelector('[data-filter="All"]').classList.add('bg-blue-500', 'text-white');
+
+            // Function to render recipes based on the selected category filter
+            function renderRecipes(filter) {
+                container.innerHTML = ''; // Clear previous recipes
+
+                recipeData.forEach(recipe => {
+                    // If "All" is selected or recipe matches the selected filter
+                    if (filter === 'All' || recipe.category === filter) {
+                        const clone = template.content.cloneNode(true);
+
+                        // Set image
+                        clone.querySelector('img').src = recipe.image;
+
+                        // Set attributes: Category, Time, Difficulty
+                        const attributeElements = clone.querySelectorAll('.p-4 > div > p');
+                        attributeElements[0].textContent = recipe.category;
+                        attributeElements[1].textContent = recipe.time;
+                        attributeElements[2].textContent = recipe.difficulty;
+
+                        // Set title
+                        clone.querySelector('h3').textContent = recipe.title;
+
+                        // Set description
+                        clone.querySelector('.p-4 > p').textContent = recipe.description;
+
+                        container.appendChild(clone);
+                    }
+                });
+            }
+
+            // Initial render showing all recipes
+            renderRecipes('All');
+
+            // Handle filter button clicks
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.getAttribute('data-filter');
+
+                    // Render recipes based on selected filter
+                    renderRecipes(filter);
+
+                    // Remove 'active' styles from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('bg-blue-500', 'text-white'));
+
+                    // Add 'active' styles to the clicked button
+                    button.classList.add('bg-blue-500', 'text-white');
+                });
             });
         </script>  
    </div> 
