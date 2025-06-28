@@ -2,7 +2,7 @@ const recipeData = [
             {
                 title: "Apple pancakes",
                 image: "Pictures/20.jpg",
-                description: "Sweet pancakes with apple inside",
+                description: "Sweet pancakes with apple peaces inside, ideally for sweet breakfasts. They can be eaten with additional toppings or with just a bit of cinamon.",
                 category: "Dessert",
                 difficulty: "Easy",
                 time: "45min",
@@ -26,9 +26,9 @@ const recipeData = [
                     "asfasd"
                 ],
                 steps: [
-                    "Mix all ingredients.",
+                    "Bananen schneiden, mit geschmolzener Schokolade überzogen und danach ins Tiefkühlfach für 30min legen",
                     "Cook on a hot griddle.",
-                    "Serve with syrup."
+                    "Bananen schneiden, mit geschmolzener Schokolade überzogen und danach ins Tiefkühlfach für 30min legen"
                 ]
             },
             {
