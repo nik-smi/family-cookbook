@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our family cookbook</title>
+    <script src="recipes.js"></script>
     <script src="https://cdn.tailwindcss.com"></script> 
     <style>
         .line-clamp-3 {
@@ -19,12 +20,34 @@
             line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;}
-    </style>
+        .scrollbar-none::-webkit-scrollbar {
+        display: none;
+        }
+        .scrollbar-none {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        }
+        </style>
 </head>
 <body>
 
-     <!-- Recipe Card Template -->
-     <template id="recipe-card-template">
+    <!-- Recipe Modal Template -->
+    <div id="recipe-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white p-6 rounded-lg w-full max-w-md max-h-[calc(100vh-40px)] overflow-y-auto mx-5 my-5 sm:mx-0 sm:my-0 relative scrollbar-none">
+            <button id="modal-close" class="absolute top-2 right-2 text-xl text-gray-600 hover:text-black cursor-pointer">✕</button>
+            <img id="modal-image" class="w-full h-48 object-cover rounded-md mb-4" />
+            <h2 id="modal-title" class="text-2xl font-semibold mb-2"></h2>
+            <p id="modal-description" class="text-gray-700 mb-4"></p>
+            <div class="text-sm text-gray-500 mb-4" id="modal-attributes"></div>
+            <h3 class="text-lg font-semibold mb-2">Ingredients</h3>
+                <ul id="modal-ingredients" class="list-disc list-inside mb-4"></ul>
+            <h3 class="text-lg font-semibold mb-2">Steps</h3>
+                <ol id="modal-steps" class="list-decimal list-inside"></ol>
+        </div>
+    </div>
+
+    <!-- Recipe Card Template -->
+    <template id="recipe-card-template">
         <div class="border border-gray-200 rounded-lg grid grid-cols-[1fr_2fr] bg-white flex flex-row">
             <img src="" alt="Recipe Image" class="w-full h-full object-cover rounded-l-lg" />
             <div class="p-4 md:p-6 flex flex-col flex-grow">
@@ -57,171 +80,10 @@
         </div>
     </div>  
 
-    <!-- Recipes -->
+    <!-- Recipes JS -->
     <div id="recipes" class="max-w-5xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-6 mb-20">
         <script>
-            const recipeData = [
-            {
-                title: "Apple pancakes",
-                image: "Pictures/20.jpg",
-                description: "Sweet pancakes with apple inside",
-                category: "Dessert",
-                difficulty: "Easy",
-                time: "45min"
-            },
-            {
-                title: "Käsespätzle",
-                image: "Pictures/19.jpg",
-                description: "The swabian pasta with lots of onion",
-                category: "Dinner",
-                difficulty: "Easy",
-                time: "30min"
-            },
-            {
-                title: "Rigatoni Bolognese Veggie",
-                image: "Pictures/1.jpg",
-                description: "The classic pasta without meat",
-                category: "Dinner",
-                difficulty: "Easy",
-                time: "30min"
-            },
-            {
-                title: "Salata od šargarepe i jabuke",
-                image: "Pictures/2.jpg",
-                description: "Nikola's childhood refreshment. Without sugar.",
-                category: "Dessert",
-                difficulty: "Easy",
-                time: "20min"
-            },
-            {
-                title: "Sommer Rolls",
-                image: "Pictures/3.jpg",
-                description: "The perfect dish on a hot day for peanut lovers.",
-                category: "Dinner",
-                difficulty: "Standard",
-                time: "45min"
-            },
-            {
-                title: "Fakexican Salat",
-                image: "Pictures/4.jpg",
-                description: "Fluffy pancakes loaded with blueberries.",
-                category: "Dinner",
-                difficulty: "Easy",
-                time: "20min"
-            },
-            {
-                title: "Kartoffel-Zuchinni-Puffer",
-                image: "Pictures/5.jpg",
-                description: "Fluffy pancakes loaded with blueberries.",
-                category: "Dinner",
-                difficulty: "Standard",
-                time: "45min"
-            },
-            {
-                title: "Sendvič sa jajima",
-                image: "Pictures/6.jpg",
-                description: "Fluffy pancakes loaded with blueberries.",
-                category: "Breakfast",
-                difficulty: "Easy",
-                time: "15min"
-            },
-            {
-                title: "Obstteller mit Scholokade überzogen",
-                image: "Pictures/7.jpg",
-                description: "Bananen schneiden, mit geschmolzener Schokolade überzogen und danach ins Tiefkühlfach für 30min legen",
-                category: "Dessert",
-                difficulty: "Easy",
-                time: "20min"
-            },
-            {
-                title: "Pad Thai",
-                image: "Pictures/8.jpg",
-                description: "Fluffy pancakes loaded with blueberries.",
-                category: "Dinner",
-                difficulty: "Diffcult",
-                time: "45min"
-            },
-            {
-                title: "Zucchini Risotto",
-                image: "Pictures/9.jpg",
-                description: "Rich meat sauce with fresh herbs.",
-                category: "Dinner",
-                difficulty: "Standard",
-                time: "45min"
-            },
-            {
-                title: "Bowl mit Tofu",
-                image: "Pictures/10.jpg",
-                description: "Fluffy pancakes loaded with blueberries.",
-                category: "Dinner",
-                difficulty: "Standard",
-                time: "30min"
-            },
-            {
-                title: "Bowl mit Bohnen",
-                image: "Pictures/11.jpg",
-                description: "Fluffy pancakes loaded with blueberries.",
-                category: "Dinner",
-                difficulty: "Standard",
-                time: "30min"
-            },
-            {
-                title: "Brokkoli Nudeln mit Köttbullar",
-                image: "Pictures/12.jpg",
-                description: "Fluffy pancakes loaded with blueberries.",
-                category: "Dinner",
-                difficulty: "Standard",
-                time: "40min"
-            },
-            {
-                title: "Käseknödel HelloFresh",
-                image: "Pictures/13.jpg",
-                description: "Rich meat sauce with fresh herbs. This is a very long text to check truncation. This is a very long text to check truncation.",
-                category: "Dinner",
-                difficulty: "Difficult",
-                time: "60min"
-            },
-            {
-                title: "Blätterteig Stangen mit Gemüsesoße",
-                image: "Pictures/14.jpg",
-                description: "Fluffy pancakes loaded with blueberries.",
-                category: "Dinner",
-                difficulty: "Easy",
-                time: "30min"
-            },
-            {
-                title: "Überbackener Rosenkohl",
-                image: "Pictures/15.jpg",
-                description: "Rich meat sauce with fresh herbs.",
-                category: "Dinner",
-                difficulty: "Easy",
-                time: "60min"
-            },
-            {
-                title: "Spinat-Ricotta Conchiglioni",
-                image: "Pictures/16.jpg",
-                description: "Fluffy pancakes loaded with blueberries.",
-                category: "Dinner",
-                difficulty: "Difficult",
-                time: "60min"
-            },
-            {
-                title: "Reissalat HelloFresh",
-                image: "Pictures/17.jpg",
-                description: "Fluffy pancakes loaded with blueberries.",
-                category: "Dinner",
-                difficulty: "Standard",
-                time: "45min"
-            },
-            {
-                title: "Bandnudeln mit Zitronen-Zucchini Soße",
-                image: "Pictures/18.jpg",
-                description: "Fluffy pancakes loaded with blueberries.",
-                category: "Dinner",
-                difficulty: "Standard",
-                time: "30min"
-            }
-            ];
+            console.log(recipeData);
             
             const container = document.getElementById('recipes');
             const template = document.getElementById('recipe-card-template');
@@ -239,28 +101,72 @@
                     if (filter === 'All' || recipe.category === filter) {
                         const clone = template.content.cloneNode(true);
 
-                        // Set image
-                        clone.querySelector('img').src = recipe.image;
+                    // Set image
+                    clone.querySelector('img').src = recipe.image;
 
-                        // Set attributes: Category, Time, Difficulty
-                        const attributeElements = clone.querySelectorAll('.p-4 > div > p');
-                        attributeElements[0].textContent = recipe.category;
-                        attributeElements[1].textContent = recipe.time;
-                        attributeElements[2].textContent = recipe.difficulty;
+                    // Set attributes: Category, Time, Difficulty
+                    const attributeElements = clone.querySelectorAll('.p-4 > div > p');
+                    attributeElements[0].textContent = recipe.category;
+                    attributeElements[1].textContent = recipe.time;
+                    attributeElements[2].textContent = recipe.difficulty;
 
-                        // Set title
-                        clone.querySelector('h3').textContent = recipe.title;
+                    // Set title
+                    clone.querySelector('h3').textContent = recipe.title;
 
-                        // Set description
-                        clone.querySelector('.p-4 > p').textContent = recipe.description;
+                    // Set description
+                    clone.querySelector('.p-4 > p').textContent = recipe.description;
 
-                        container.appendChild(clone);
+                    // Add click handler to open modal
+                    clone.querySelector('div').addEventListener('click', () => {
+                        document.getElementById('modal-image').src = recipe.image;
+                        document.getElementById('modal-title').textContent = recipe.title;
+                        document.getElementById('modal-description').textContent = recipe.description;
+                        document.getElementById('modal-attributes').textContent =
+                        `${recipe.category} • ${recipe.time} • ${recipe.difficulty}`;
+
+                        // Ingredients
+                        const ingredientsList = document.getElementById('modal-ingredients');
+                        ingredientsList.innerHTML = '';
+                        recipe.ingredients.forEach(ingredient => {
+                        const li = document.createElement('li');
+                        li.textContent = ingredient;
+                        ingredientsList.appendChild(li);
+                        });
+
+                        // Steps
+                        const stepsList = document.getElementById('modal-steps');
+                        stepsList.innerHTML = '';
+                        recipe.steps.forEach(step => {
+                        const li = document.createElement('li');
+                        li.textContent = step;
+                        stepsList.appendChild(li);
+                        });
+
+                    // Show modal
+                    document.getElementById('recipe-modal').classList.remove('hidden');
+                    document.body.classList.add('overflow-hidden');
+                    });
+
+                    container.appendChild(clone);
                     }
+                    
                 });
             }
 
             // Initial render showing all recipes
             renderRecipes('All');
+
+            // Modal close button functionality
+            document.getElementById('modal-close').addEventListener('click', () => {
+                document.getElementById('recipe-modal').classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            });
+            document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                document.getElementById('recipe-modal').classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+            });
 
             // Handle filter button clicks
             filterButtons.forEach(button => {
@@ -278,7 +184,7 @@
                 });
             });
         </script>  
-   </div> 
+    </div>
 
 </body>
 </html>
