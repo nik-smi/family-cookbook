@@ -20,21 +20,27 @@
 <body>
 
     <!-- Recipe Modal Template -->
-    <div id="recipe-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div class="bg-white p-6 rounded-lg w-full max-w-md max-h-[80vh] overflow-y-auto mx-5 my-5 sm:mx-0 sm:my-0 relative scrollbar-none">
-            <div class="flex justify-end">
-                <button id="modal-close" class="text-xl text-gray-600 hover:text-black cursor-pointer mb-4">✕</button>
+    <div id="recipe-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-5 sm:p-0">
+        <div id="modal-content" class="bg-white rounded-xl w-full max-w-md max-h-[80vh] overflow-y-auto relative scrollbar-none flex flex-col">
+            <div class="relative">
+                <img id="modal-image" class="w-full h-64 object-cover rounded-t-lg" />
+                <button id="modal-close" class="absolute top-3 right-3 w-8 h-8 bg-white hover:bg-white text-black rounded-full flex items-center justify-center text-lg shadow" aria-label="Close modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
             </div>
-            <img id="modal-image" class="w-full h-60 object-cover rounded-md mb-4" />
-            <div class="text-sm text-gray-500 mb-4" id="modal-attributes"></div>
-            <h2 id="modal-title" class="text-2xl font-semibold mb-2"></h2>
-            <p id="modal-description" class="text-gray-700 mb-6"></p>
-            <hr class="my-6 border-t border-gray-200" />
-            <h3 class="text-lg font-semibold mb-2">Ingredients</h3>
-                <ul id="modal-ingredients" class="list-disc list-inside mb-4"></ul>
-            <hr class="my-6 border-t border-gray-200" />
-            <h3 class="text-lg font-semibold mb-2">Steps</h3>
-                <ol id="modal-steps" class="list-decimal list-inside"></ol>
+            <div class="p-6 flex flex-col flex-grow">
+                <div class="text-sm text-gray-500 mb-4" id="modal-attributes"></div>
+                <h2 id="modal-title" class="text-2xl font-semibold mb-2"></h2>
+                <p id="modal-description" class="text-gray-700 mb-6"></p>
+                <hr class="my-6 border-t border-gray-200" />
+                <h3 class="text-lg font-semibold mb-2">Ingredients</h3>
+                    <ul id="modal-ingredients" class="list-disc list-inside mb-4"></ul>
+                <hr class="my-6 border-t border-gray-200" />
+                <h3 class="text-lg font-semibold mb-2">Steps</h3>
+                    <ol id="modal-steps" class="list-decimal list-inside"></ol>
+            </div>
         </div>
     </div>
 
@@ -138,8 +144,15 @@
 
                     // Show modal
                     document.getElementById('recipe-modal').classList.remove('hidden');
+                    document.getElementById('modal-content').scrollTop = 0;
                     document.body.classList.add('overflow-hidden');
                     });
+
+                    // Reset scroll to top
+                    setTimeout(() => {
+                    const modalContent = document.getElementById('modal-content');
+                    if (modalContent) modalContent.scrollTop = 0;
+                    }, 0);
 
                     container.appendChild(clone);
                     }
@@ -163,12 +176,12 @@
             });
 
             // Close modal when clicking outside the modal content
-modal.addEventListener('click', function (e) {
-  if (e.target === modal) {
-    modal.classList.add('hidden');
-    document.body.classList.remove('overflow-hidden');
-  }
-});
+            modal.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+            });
 
             // Handle filter button clicks
             filterButtons.forEach(button => {

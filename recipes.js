@@ -6,7 +6,6 @@ const recipeData = [
                 category: "Dessert",
                 difficulty: "Easy",
                 time: "45min",
-                time: "30min",
                 ingredients: [
                     "1 cup flour",
                     "2 eggs",
@@ -180,7 +179,7 @@ const recipeData = [
                 image: "Pictures/8.jpg",
                 description: "Fluffy pancakes loaded with blueberries.",
                 category: "Dinner",
-                difficulty: "Diffcult",
+                difficulty: "Difficult",
                 time: "45min",
                 ingredients: [
                     "1 cup flour",
